@@ -31,7 +31,7 @@ diagnosticoController.registrarDiagnostico = async (req, res
             learning_styles: {
                 visual: 0.6,
                 textual: 0.2,
-                kinestetico: 0.1,
+                kinestesico: 0.1,
                 auditivo: 0.1
             },
         };
@@ -44,8 +44,10 @@ diagnosticoController.registrarDiagnostico = async (req, res
             learning_styles: respuestaMoodle.learning_styles,
         });
 
+
         await resgistrarEstiloHistorico.save();
         //Enviar respuesta a Moodle
+        console.log('Respuesta enviada a Moodle:', respuestaMoodle);
         res.status(201).json(respuestaMoodle);
 
     } catch (error) {

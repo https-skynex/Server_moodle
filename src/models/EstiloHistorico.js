@@ -9,7 +9,7 @@ const estilosHistoricoSchema = new mongoose.Schema({
     learning_styles : {
         visual: { type: Number, required: true },
         textual: { type: Number, required: true },
-        kinestetico: { type: Number, required: true },
+        kinestesico: { type: Number, required: true },
         auditivo: { type: Number, required: true }
     },
 });
