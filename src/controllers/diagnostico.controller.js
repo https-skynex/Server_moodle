@@ -11,13 +11,12 @@ diagnosticoController.registrarDiagnostico = async (req, res
     try {
         console.log('Datos recibidos desde Moodle:', req.body);
 
-        const { id_estudiante, id_curso, preguntas, fecha_realizacion } = req.body;
+        const { userid, courseid, attempt} = req.body;
         //Crear un registro de prueba de diagnostico.
         const nuevoDiagnostico = new Diagnostico({
-            id_estudiante,
-            id_curso,
-            preguntas,
-            fecha_realizacion
+            userid,
+            courseid,
+            attempt
         });
 
         //Guardar el diagnostico.
@@ -25,23 +24,24 @@ diagnosticoController.registrarDiagnostico = async (req, res
 
         // SIMULACION: Respuesta fija a Moodle - learning journey 
         const respuestaMoodle = {
-            id_estudiante: id_estudiante,
-            id_curso: id_curso,
-            feedback_message: "En base a tu prueba de diagnóstico te recomendamos revises los siguientes recursos",
+            userid: userid,
+            courseid: courseid,
             learning_styles: {
-                visual: 0.6,
-                textual: 0.2,
-                kinestesico: 0.1,
-                auditivo: 0.1
+                visual: 0.1,
+                auditory: 0.7,
+                textual: 0.1,
+                kinesthetic: 0.1
             },
+            feedback_message: "En base a tu prueba de diagnóstico te recomendamos revises los siguientes recursos Server GUIA",
+            
         };
         
         //Guardado en la BDD los resultados en coleccion EstilosHistoricos.
         const resgistrarEstiloHistorico = new EstiloHistorico({
-            id_estudiante,
-            id_curso,
-            feedback_message: respuestaMoodle.feedback_message,
+            userid,
+            courseid,
             learning_styles: respuestaMoodle.learning_styles,
+            feedback_message: respuestaMoodle.feedback_message,
         });
 
 
